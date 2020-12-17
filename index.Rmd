@@ -14,14 +14,14 @@ library(tidyverse)
 source("code.R")
 ```
 
-<h1>199 postulaciones en 8 ciclos</h1>
+<h1>451 postulaciones en 15 ciclos</h1>
 
 ```{r echo=F, warning=F, message=F}
 numero_portulaciones
 ```
 
 
-<h1>¿De donde vienen las postulaciones?: La mitad de Colombia y Brasil</h1>
+<h1>¿De donde vienen las postulaciones?: La gran parte de Colombia y Brasil</h1>
 
 ```{r echo=F, warning=F, message=F}
 donde_postulaciones
@@ -29,8 +29,10 @@ donde_postulaciones
 
 <h1>¿De donde vienen las postulaciones en cada ciclo?</h1>
 
+Puede desactivar el país que quierea o pasar su moouse por encima de las ondas o de la leyenda de los países para concer más detalles
+
 ```{r echo=F, warning=F, message=F}
-numero_portulaciones_ciclo
+rio_tipo
 ```
 
 

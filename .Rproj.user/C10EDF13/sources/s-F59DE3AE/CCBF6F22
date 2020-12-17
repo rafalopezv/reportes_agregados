@@ -1,0 +1,25 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1608223289859.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3732750274",
+    "id" : "CCBF6F22",
+    "lastKnownWriteTime" : 1608229227,
+    "last_content_update" : 1608229227222,
+    "path" : "~/Documents/consultorias/pulsante/reportes_agregados/code.R",
+    "project_path" : "code.R",
+    "properties" : {
+        "cursorPosition" : "465,0",
+        "scrollLine" : "460"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

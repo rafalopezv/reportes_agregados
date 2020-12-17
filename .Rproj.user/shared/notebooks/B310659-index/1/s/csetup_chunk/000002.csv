@@ -1,0 +1,9 @@
+"0","knitr::opts_chunk$set(echo = TRUE)"
+"0","library(highcharter)"
+"0","library(tidyverse)"
+"0","source(""code.R"")"
+"2","Error in source(""code.R"") : code.R:293:1: unexpected symbol
+292: 
+293: hchart
+     ^
+"

@@ -11,17 +11,19 @@ bases <- bases[grep("FRR/ciclo_", bases)]
 bases <- bases[grep("xlsx", bases)]
 bases <- bases[grep("Pulsante_ todas las propuestas FRR 2020", bases, invert = T)]
 
+# ordenar
+bases <- bases[c(1, 8, 9:15, 2:7)]
 
 datos1 <- rio::import_list(bases[1], rbind = T)
 datos2 <- rio::import_list(bases[2], rbind = T)
-datos3 <- map(bases[3:8], rio::import) %>% map(., janitor::clean_names)
+datos3 <- map(bases[3:15], rio::import) %>% map(., janitor::clean_names)
 datos <- list(datos1, datos2)
 datos <- c(datos, datos3)
 
 
 # numero de proyectos
 tibble(
-  Ciclo = paste0(rep("Ciclo ", 8), seq(1,8, 1)),
+  Ciclo = paste0(rep("Ciclo ", 15), seq(1,15, 1)),
   Postulaciones = map_int(datos, nrow)
 ) %>% 
   hchart("line", hcaes(Ciclo, Postulaciones)) %>% 
@@ -48,7 +50,7 @@ tibble(
 
 # ggplot : numero de postulaciones
 tibble(
-  Ciclo = paste0(rep("Ciclo ", 8), seq(1,8, 1)),
+  Ciclo = paste0(rep("Ciclo ", 15), seq(1,15, 1)),
   Postulaciones = map_int(datos, nrow)
 ) %>%
   ggplot(aes(Ciclo, Postulaciones)) +
@@ -57,13 +59,14 @@ tibble(
   geom_text(aes(label = Postulaciones), family = "Open Sans", vjust = -0.5) + 
   hrbrthemes::theme_ipsum_rc() + 
   labs( 
-    title = "8 Ciclos, 169 postulaciones",
+    title = "15 Ciclos, 169 postulaciones",
     subtitle = "Fondo de Respuesta Rápida"
   ) + 
   ggsave(here::here("numero_postulaciones.jpg"), width = 10, height = 6)
 
+
 # de donde viene
-map(datos[3:8], 14) -> temp
+map(datos[3:15], 14) -> temp
 
 for(i in 1:length(temp)) {
   temp[[i]] %<>% as.data.frame()
@@ -237,6 +240,23 @@ temp_1 %>%
   hchart("column", hcaes(`País`, postulaciones, group = ciclo)) %>% 
   hc_chart(style = list(fontFamily = "Open Sans")) -> numero_portulaciones_ciclo
 
+
+temp_1 %>% 
+  filter(`País` %in% mapa$name) %>% 
+  filter(`País` != "Canada" ) %>% 
+  mutate(ciclo1 = paste0("Ciclo: ", ciclo)) %>% 
+  ggplot(aes(`País`, postulaciones)) + 
+  geom_col() + 
+  facet_wrap(~ciclo1, scales = "free", ncol = 2) + 
+  hrbrthemes::theme_ipsum_rc(base_family = "Open Sans") + 
+  theme(
+    axis.text.x = element_text(size  = 8)
+  ) + 
+  coord_flip() + 
+  ggsave("ciclos.jpg", height = 12)
+
+
+
 # temas.
 temas <- map(datos, "tema") %>% unlist() %>% as.data.frame() %>% 
   rename(tema = ".")
@@ -270,6 +290,9 @@ cols <- rep(c("#E01F52", "#C6A659", "#06D6A0", "#466B77", "#073B4C",
 
 cols <- cols[1:47]
 
+
+
+
 hchart(
   data_to_hierarchical(temp1, tema, prop, colors = cols),
   type = "treemap",
@@ -286,8 +309,24 @@ hchart(
     style = list(fontFamily = "Open Sans")
   ) -> temas
 
+temp1 %>%
+  mutate_if(is.numeric, round, 1) %>% 
+  mutate(
+    etiqueta = paste0(tema, ":", "\n", prop, "%")
+  ) -> aa
+  
+library(treemapify)
 
-
+aa %>% 
+  ggplot(aes(area = prop, label = etiqueta, fill = n)) +
+  geom_treemap(color = "white", start = "topleft") +
+  geom_treemap_text(min.size = 1, place = "center", family = "Open Sans", color = "white", start = "topleft") +
+  #scale_fill_gradientn(colors = c("blue","green3")) +
+  theme(legend.position = "NA") +
+  theme(text = element_text(family = "Open Sans")) + 
+  scale_fill_viridis_c(option = "A", direction = -1, begin = 0.1, end = 0.7) +
+  ggsave("temas.jpg", width = 12, height = 10)
+  
 
 map_dfr(datos[3:8], extract, c(7, 14, 19, 21)) -> temp
 
@@ -311,6 +350,142 @@ temp %>%
   ) -> tabla
 
 
+
+
+# cada ciclo por país
+map(datos[3:15], 14) -> aa
+
+stream <- function(.data) {
+  .data %<>% 
+    as.data.frame() %>% 
+    rename(pais = ".") %>% 
+    separate(col = pais, sep = ",", into = letters[1:15]) %>% 
+    janitor::remove_empty() %>% 
+    gather() %>% 
+    filter(!is.na(value)) %>% 
+    count(value)
+  
+  return(.data)
+}
+
+map(aa, stream) -> aa
+
+for(i in 1:length(aa)) {
+  aa[[i]] %<>% mutate(Ciclo = i + 2)
+}
+
+
+temp <- datos[[1]]$`País(es)` 
+  
+temp %<>% 
+  as.data.frame() %>% 
+  rename(value = ".") 
+  
+temp$value %<>% gsub("Brasil, com posibilidades de envio das mulheres, cuja situação não se enquadra nas exceções legais brasileiras da criminalização do aborto, para Colombia, Argentina e México", "Brasil", .)
+
+temp %<>% 
+  separate(col = value, sep = ",", into = letters[1:15]) %>% 
+  janitor::remove_empty() %>% 
+  gather() %>% 
+  filter(!is.na(value)) %>% 
+  count(value) %>% 
+  mutate(value = trimws(value)) %>% 
+  count(value) %>% 
+  filter(!value %in% c("Zimbabwe", "India", "DRC", "Latinoamérica", "Cameroon", "México y España", 
+                       "Nicaragua y Uruguay", "Paraguay y Perú"))
+
+temp$value %<>% gsub("COLOMBIA", "Colombia", .) 
+temp[temp$value == "México", "n"] <- 4
+temp[temp$value == "Nicaragua", "n"] <- 4
+
+tibble(
+  value = c("Uruguay", "Paraguay", "Perú"), 
+  n = 1
+) %>% 
+  bind_rows(., temp) %>% 
+  count(value) %>% 
+  mutate(Ciclo = 1) -> temp
+  
+
+temp1 <- datos[[2]]$`7. Menciona el país(es) donde se realizará el proyecto`
+
+temp1 %<>% 
+  as.data.frame() %>% 
+  rename(value = ".") 
+
+temp1$value %<>% gsub("Oaxaca, México","México", .)
+temp1$value %<>% gsub("La sede central desde donde se ejecutará el proyecto es la ciudad de Lima-Perú, pero al ser una propuesta que se realizará de manera virtual, tendrá alcance en todo el territorio peruano.","Perú", .)
+temp1$value %<>% gsub("En el municipio de Yajalon, correspondiente al Estado de Chiapas en el país de México","México", .)
+temp1$value %<>% gsub("Chile, en todas sus regiones.","Chile", .)
+temp1$value %<>% gsub("10 regiones del Perú", "Perú", .)
+temp1$value %<>% gsub("BOLIVIA. El proyecto de realizará en los municipios de Santa Rosa de Yacuma y Reyes de la provincia Ballivian del departamento de Beni.", "Bolivia", .)
+
+
+temp1 %<>% 
+  separate(col = value, sep = ",", into = letters[1:15]) %>% 
+  janitor::remove_empty() %>% 
+  gather() %>% 
+  filter(!is.na(value)) %>% 
+  count(value) %>% 
+  mutate(value = trimws(value)) %>% 
+  count(value)
+
+
+temp1$value %<>% gsub("ARGENTINA", "Argentina", .) 
+temp1$value %<>% gsub("colombia", "Colombia", .) 
+temp1$value %<>% gsub("México.", "México", .)
+temp1$value %<>% gsub("Peru", "Perú", .)
+
+temp1 %<>% 
+  filter(!value %in% c("Canadá", "Estados Unidos", "Francia", "Inglaterra", "Noruega"))
+
+temp1 %>% 
+  count(value) %>% 
+  mutate(Ciclo = 2) %>% 
+  bind_rows(., temp) -> temp
+
+bind_rows(aa) %>% 
+  bind_rows(., temp) -> temp 
+
+
+temp %<>% arrange(Ciclo)
+
+temp$value %>% unique %>% view
+
+temp$value %<>% gsub("Bolívia", "Bolivia", .) 
+temp$value %<>% gsub("Brazil", "Brasil", .) 
+temp$value %<>% gsub("Haiti", "Haití", .) 
+temp$value %<>% gsub("Peru", "Perú", .) 
+
+
+temp %>% 
+  group_by(value, Ciclo) %>% 
+  summarise(n = sum(n)) -> temp
+  
+
+hchart(temp, "streamgraph", hcaes(Ciclo, n, group = value),
+       label = list(
+         enabled = TRUE, minFontSize = 5, maxFontSize = 20,
+         style = list(
+           fontWeight = 70,
+           textOutline = "0.5px gray",
+           color = "white"
+         )
+       )
+) %>% 
+  hc_tooltip(shared = T, table = T, sort = T, borderWidth = 0.001,
+             style = list(fontFamily = "Open Sans"), backgroundColor = "white") %>% 
+  hc_yAxis(visible = F) %>% 
+  hc_xAxis(visible = T) %>% 
+  hc_chart(style = list(fontFamily = "Open Sans")) %>% 
+  hc_plotOptions(
+    series = list(
+      marker = list(radius = 3, enabled = FALSE, symbol = "circle"),
+      states = list(hover = list(halo = list(size = 1)))
+    )
+  ) %>% 
+  hc_size(height = 800) %>% 
+  hc_legend(layout = "horizontal") -> rio_tipo
 
 
 
