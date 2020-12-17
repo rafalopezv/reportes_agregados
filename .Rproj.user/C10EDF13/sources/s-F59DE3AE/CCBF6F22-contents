@@ -328,7 +328,7 @@ aa %>%
   ggsave("temas.jpg", width = 12, height = 10)
   
 
-map_dfr(datos[3:8], extract, c(7, 14, 19, 21)) -> temp
+map_dfr(datos[3:15], extract, c(7, 14, 19, 21)) -> temp
 
 temp %<>% select(-5, -6)
 colnames(temp) <- c("Organización lider", "País", "Tema", "Resumen del proyecto")

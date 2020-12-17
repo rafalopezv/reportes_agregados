@@ -29,7 +29,7 @@ donde_postulaciones
 
 <h1>¿De donde vienen las postulaciones en cada ciclo?</h1>
 
-Puede desactivar el país que quierea o pasar su moouse por encima de las ondas o de la leyenda de los países para concer más detalles
+Puede desactivar el país que quierea o pasar su mouse por encima de las ondas o de la leyenda de los países para concer más detalles
 
 ```{r echo=F, warning=F, message=F}
 rio_tipo

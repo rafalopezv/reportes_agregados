@@ -5,15 +5,15 @@
     "dirty" : false,
     "encoding" : "UTF-8",
     "folds" : "",
-    "hash" : "3732750274",
+    "hash" : "2182387588",
     "id" : "CCBF6F22",
-    "lastKnownWriteTime" : 1608229227,
-    "last_content_update" : 1608229227222,
+    "lastKnownWriteTime" : 1608229759,
+    "last_content_update" : 1608229759747,
     "path" : "~/Documents/consultorias/pulsante/reportes_agregados/code.R",
     "project_path" : "code.R",
     "properties" : {
-        "cursorPosition" : "465,0",
-        "scrollLine" : "460"
+        "cursorPosition" : "335,0",
+        "scrollLine" : "326"
     },
     "read_only" : false,
     "read_only_alternatives" : [
