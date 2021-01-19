@@ -1,0 +1,33 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1611071338026.000,
+    "dirty" : false,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "CF7F9642",
+    "lastKnownWriteTime" : 4294967300,
+    "last_content_update" : 1611071338026,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "cacheKey" : "F60631B6",
+        "caption" : ".",
+        "contentUrl" : "grid_resource/gridviewer.html?env=_rs_no_env&obj=&cache_key=F60631B6",
+        "displayedObservations" : "20",
+        "environment" : "_rs_no_env",
+        "expression" : "structure(list(pais = c(\"Argentina\", \"Bolivia\", \"Brasil\", \"Chile\",  \"Colombia\", \"Costa Rica\", \"Cuba\", \"Ecuador\", \"El Salvador\", \"Guatemala\",  \"Haití\", \"Honduras\", \"México\", \"Nicaragua\", \"Panamá\", \"Paraguay\",  \"Perú\", \"República Dominicana\", \"Uruguay\", \"Venezuela\")), row.names = c(1L,  28L, 43L, 135L, 162L, 286L, 293L, 294L, 305L, 317L, 345L, 348L,  363L, 424L, 437L, 442L, 448L, 468L, 472L, 480L), class = \"data.frame\")",
+        "object" : "",
+        "preview" : "0",
+        "totalObservations" : "20",
+        "variables" : "1"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_dataframe"
+}

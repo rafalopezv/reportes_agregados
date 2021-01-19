@@ -1,1 +1,0 @@
-{"frames":[{"character_number":0,"end_character_number":0,"end_line_number":0,"file":"","func":"source(\"code.R\")","line_number":0}],"message":"Error in source(\"code.R\") : code.R:293:1: unexpected symbol\n292: \n293: hchart\n     ^\n"}

@@ -1,0 +1,7 @@
+# install.package('remotes')
+remotes::install_github('coolbutuseless/devout')
+remotes::install_github('coolbutuseless/devoutrgl')
+remotes::install_github('coolbutuseless/triangular')
+remotes::install_github('coolbutuseless/snowcrash')
+remotes::install_github('coolbutuseless/cryogenic')
+remotes::install_github('coolbutuseless/ggrgl', ref='main')
