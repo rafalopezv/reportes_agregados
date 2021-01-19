@@ -213,7 +213,7 @@ hchart(
   hc_tooltip(backgroundColor = "white", borderWidth = 0.001, valueSuffix = "%") %>% 
   hc_size(height = 550) %>% 
   hc_title(text = "El área representa la proporción del tema") %>% 
-  hc_subtitle(text = "Puede hacer click sobre el tema agregado en letras grandes para mayores detalles<br>Las letras garndes representan a los temas agregados y las pequeñas a los sub-temas") 
+  hc_subtitle(text = "Puede hacer click sobre el tema agregado en letras grandes para mayores detalles<br>Las letras grandes representan a los temas agregados y las pequeñas a los sub-temas") 
   
 ```
 ---
