@@ -5,17 +5,17 @@
     "dirty" : false,
     "encoding" : "UTF-8",
     "folds" : "",
-    "hash" : "0",
+    "hash" : "179580533",
     "id" : "1A9330A0",
-    "lastKnownWriteTime" : 1611090349,
-    "last_content_update" : 1611090349011,
+    "lastKnownWriteTime" : 1611091578,
+    "last_content_update" : 1611091578345,
     "path" : "~/Documents/consultorias/pulsante/reportes_agregados/index.Rmd",
     "project_path" : "index.Rmd",
     "properties" : {
         "chunk_output_type" : "console",
-        "cursorPosition" : "1606,2",
+        "cursorPosition" : "1641,17",
         "last_setup_crc32" : "F59DE3AEbbf28f9d",
-        "scrollLine" : "1593"
+        "scrollLine" : "1624"
     },
     "read_only" : false,
     "read_only_alternatives" : [

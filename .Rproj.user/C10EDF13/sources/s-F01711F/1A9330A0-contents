@@ -188,8 +188,8 @@ lvl_opts <-  list(
     colorVariation = list(key = "brightness", to = 0.250),
     dataLabels = list(
       enabled = T,
-      align = "left",
-      verticalAlign = "top",
+      align = "right",
+      verticalAlign = "bottom",
       style = list(fontSize = "9px", textOutline = FALSE, color = "black", fontFamoly = "Open Sans Light")
       ),
     style = list(fontSize = "8px", textOutline = FALSE, color = "black")
@@ -388,8 +388,8 @@ lvl_opts <-  list(
     colorVariation = list(key = "brightness", to = 0.250),
     dataLabels = list(
       enabled = T,
-      align = "left",
-      verticalAlign = "top",
+      align = "right",
+      verticalAlign = "bottom",
       style = list(fontSize = "9px", textOutline = FALSE, color = "black", fontFamoly = "Open Sans Light")
       ),
     style = list(fontSize = "8px", textOutline = FALSE, color = "black")
@@ -461,8 +461,8 @@ lvl_opts <-  list(
     colorVariation = list(key = "brightness", to = 0.250),
     dataLabels = list(
       enabled = T,
-      align = "left",
-      verticalAlign = "top",
+      align = "right",
+      verticalAlign = "bottom",
       style = list(fontSize = "9px", textOutline = FALSE, color = "black", fontFamoly = "Open Sans Light")
       ),
     style = list(fontSize = "8px", textOutline = FALSE, color = "black")
@@ -534,8 +534,8 @@ lvl_opts <-  list(
     colorVariation = list(key = "brightness", to = 0.250),
     dataLabels = list(
       enabled = T,
-      align = "left",
-      verticalAlign = "top",
+      align = "right",
+      verticalAlign = "bottom",
       style = list(fontSize = "9px", textOutline = FALSE, color = "black", fontFamoly = "Open Sans Light")
       ),
     style = list(fontSize = "8px", textOutline = FALSE, color = "black")
@@ -595,8 +595,8 @@ lvl_opts <-  list(
     borderColor = "transparent",
     dataLabels = list(
       enabled = TRUE,
-      align = "left",
-      verticalAlign = "top",
+      align = "right",
+      verticalAlign = "bottom",
       style = list(fontSize = "16px", textOutline = FALSE, color = "black")
     )
   ),
@@ -668,8 +668,8 @@ lvl_opts <-  list(
     borderColor = "transparent",
     dataLabels = list(
       enabled = TRUE,
-      align = "left",
-      verticalAlign = "top",
+      align = "right",
+      verticalAlign = "bottom",
       style = list(fontSize = "16px", textOutline = FALSE, color = "black")
     )
   ),
@@ -754,8 +754,8 @@ lvl_opts <-  list(
     colorVariation = list(key = "brightness", to = 0.250),
     dataLabels = list(
       enabled = T,
-      align = "left",
-      verticalAlign = "top",
+      align = "right",
+      verticalAlign = "bottom",
       style = list(fontSize = "9px", textOutline = FALSE, color = "black", fontFamoly = "Open Sans Light")
       ),
     style = list(fontSize = "8px", textOutline = FALSE, color = "black")
@@ -828,8 +828,8 @@ lvl_opts <-  list(
     colorVariation = list(key = "brightness", to = 0.250),
     dataLabels = list(
       enabled = T,
-      align = "left",
-      verticalAlign = "top",
+      align = "right",
+      verticalAlign = "bottom",
       style = list(fontSize = "9px", textOutline = FALSE, color = "black", fontFamoly = "Open Sans Light")
       ),
     style = list(fontSize = "8px", textOutline = FALSE, color = "black")
@@ -901,8 +901,8 @@ lvl_opts <-  list(
     colorVariation = list(key = "brightness", to = 0.250),
     dataLabels = list(
       enabled = T,
-      align = "left",
-      verticalAlign = "top",
+      align = "right",
+      verticalAlign = "bottom",
       style = list(fontSize = "9px", textOutline = FALSE, color = "black", fontFamoly = "Open Sans Light")
       ),
     style = list(fontSize = "8px", textOutline = FALSE, color = "black")
@@ -975,8 +975,8 @@ lvl_opts <-  list(
     colorVariation = list(key = "brightness", to = 0.250),
     dataLabels = list(
       enabled = T,
-      align = "left",
-      verticalAlign = "top",
+      align = "right",
+      verticalAlign = "bottom",
       style = list(fontSize = "9px", textOutline = FALSE, color = "black", fontFamoly = "Open Sans Light")
       ),
     style = list(fontSize = "8px", textOutline = FALSE, color = "black")
@@ -1049,8 +1049,8 @@ lvl_opts <-  list(
     colorVariation = list(key = "brightness", to = 0.250),
     dataLabels = list(
       enabled = T,
-      align = "left",
-      verticalAlign = "top",
+      align = "right",
+      verticalAlign = "bottom",
       style = list(fontSize = "9px", textOutline = FALSE, color = "black", fontFamoly = "Open Sans Light")
       ),
     style = list(fontSize = "8px", textOutline = FALSE, color = "black")
@@ -1123,8 +1123,8 @@ lvl_opts <-  list(
     colorVariation = list(key = "brightness", to = 0.250),
     dataLabels = list(
       enabled = T,
-      align = "left",
-      verticalAlign = "top",
+      align = "right",
+      verticalAlign = "bottom",
       style = list(fontSize = "9px", textOutline = FALSE, color = "black", fontFamoly = "Open Sans Light")
       ),
     style = list(fontSize = "8px", textOutline = FALSE, color = "black")
@@ -1196,8 +1196,8 @@ lvl_opts <-  list(
     colorVariation = list(key = "brightness", to = 0.250),
     dataLabels = list(
       enabled = T,
-      align = "left",
-      verticalAlign = "top",
+      align = "right",
+      verticalAlign = "bottom",
       style = list(fontSize = "9px", textOutline = FALSE, color = "black", fontFamoly = "Open Sans Light")
       ),
     style = list(fontSize = "8px", textOutline = FALSE, color = "black")
@@ -1270,8 +1270,8 @@ lvl_opts <-  list(
     colorVariation = list(key = "brightness", to = 0.250),
     dataLabels = list(
       enabled = T,
-      align = "left",
-      verticalAlign = "top",
+      align = "right",
+      verticalAlign = "bottom",
       style = list(fontSize = "9px", textOutline = FALSE, color = "black", fontFamoly = "Open Sans Light")
       ),
     style = list(fontSize = "8px", textOutline = FALSE, color = "black")
@@ -1345,8 +1345,8 @@ lvl_opts <-  list(
     colorVariation = list(key = "brightness", to = 0.250),
     dataLabels = list(
       enabled = T,
-      align = "left",
-      verticalAlign = "top",
+      align = "right",
+      verticalAlign = "bottom",
       style = list(fontSize = "9px", textOutline = FALSE, color = "black", fontFamoly = "Open Sans Light")
       ),
     style = list(fontSize = "8px", textOutline = FALSE, color = "black")
@@ -1419,8 +1419,8 @@ lvl_opts <-  list(
     colorVariation = list(key = "brightness", to = 0.250),
     dataLabels = list(
       enabled = T,
-      align = "left",
-      verticalAlign = "top",
+      align = "right",
+      verticalAlign = "bottom",
       style = list(fontSize = "9px", textOutline = FALSE, color = "black", fontFamoly = "Open Sans Light")
       ),
     style = list(fontSize = "8px", textOutline = FALSE, color = "black")
@@ -1492,8 +1492,8 @@ lvl_opts <-  list(
     colorVariation = list(key = "brightness", to = 0.250),
     dataLabels = list(
       enabled = T,
-      align = "left",
-      verticalAlign = "top",
+      align = "right",
+      verticalAlign = "bottom",
       style = list(fontSize = "9px", textOutline = FALSE, color = "black", fontFamoly = "Open Sans Light")
       ),
     style = list(fontSize = "8px", textOutline = FALSE, color = "black")
@@ -1565,8 +1565,8 @@ lvl_opts <-  list(
     colorVariation = list(key = "brightness", to = 0.250),
     dataLabels = list(
       enabled = T,
-      align = "left",
-      verticalAlign = "top",
+      align = "right",
+      verticalAlign = "bottom",
       style = list(fontSize = "9px", textOutline = FALSE, color = "black", fontFamoly = "Open Sans Light")
       ),
     style = list(fontSize = "8px", textOutline = FALSE, color = "black")
@@ -1638,8 +1638,8 @@ lvl_opts <-  list(
     colorVariation = list(key = "brightness", to = 0.250),
     dataLabels = list(
       enabled = T,
-      align = "left",
-      verticalAlign = "top",
+      align = "right",
+      verticalAlign = "bottom",
       style = list(fontSize = "9px", textOutline = FALSE, color = "black", fontFamoly = "Open Sans Light")
       ),
     style = list(fontSize = "8px", textOutline = FALSE, color = "black")
