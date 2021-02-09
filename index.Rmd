@@ -1,5 +1,5 @@
 ---
-title: "Análisis sobre las temáticas de las postulaciones"
+title: "Análisis sobre las temáticas de las postulaciones y su relación con PULSANTE"
 subtitle: "Fondo de Respuesta Rápida"
 author: "PULSANTE"
 output:
@@ -47,6 +47,7 @@ for(i in 1:length(datos)) {
 
 # temas por país
 extraer <- c("tema",  "menciona_el_pais_o_paises_donde_se_realizara_el_proyecto_puedes_elegir_mas_de_un_pais", "ciclo")
+
 map_dfr(datos[3:15], ~extract(., extraer)) %>% 
   rename(
     pais = menciona_el_pais_o_paises_donde_se_realizara_el_proyecto_puedes_elegir_mas_de_un_pais
@@ -100,19 +101,39 @@ temp[temp1, "pais"] <- "Perú"
 temp1 <- which(temp$pais == "Salvador")
 temp[temp1, "pais"] <- "El Salvador"
 
+temp1 <- which(temp$tema == "Transporte público")
+temp[temp1, "tema"] <- "Ciudades"
+
+temp1 <- which(temp$tema == "Violencia doméstica")
+temp[temp1, "tema"] <- "Violencia de género"
+
+temp1 <- which(temp$tema == "Violencia sexual")
+temp[temp1, "tema"] <- "Violencia de género"
+
+temp1 <- which(temp$tema == "Violencia sexual")
+temp[temp1, "tema"] <- "Violencia de género"
+
+temp1 <- which(temp$tema == "Equidad de género")
+temp[temp1, "tema"] <- "Equidad de Género"
+
+temp1 <- which(temp$tema == "Derechos de pueblos indígenas")
+temp[temp1, "tema"] <- "Derechos pueblos indígenas"
+
 # agragdor
-agregado <- rio::import("input/temas_grandes.csv")
+agregado <- rio::import("input/temas_grandes_1.csv") %>% 
+  janitor::clean_names() %>% 
+  select(1:3)
 
-temp %<>% 
+temp %>% 
   merge(., agregado, all.x = T) %>% 
-  filter(!is.na(agregado))
+  filter(!is.na(indicadores_pulsante)) %>% 
+  separate_rows(indicadores_pulsante, sep = ",") %>% 
+  separate_rows(sub_indicadores_pulsante, sep = ",") %>% 
+  mutate_if(is.character, trimws) -> temp
 
-temp$tema %>% unique %>% view
-
-a <- which(temp$tema == "Equidad de género")
-temp[a, "tema"] <- "Equidad de Género"
-
-
+temp1 <- which(temp$indicadores_pulsante == "Otro")
+temp[temp1, "indicadores_pulsante"] <- "Otros (fuera de PULSANTE)"
+temp[temp1, "sub_indicadores_pulsante"] <- "Otros (fuera de PULSANTE)"
 
 ```
 
@@ -126,10 +147,11 @@ background-size: cover
 
 # Objetivo de la presentación
 
-Determinar a partir de las casi 500 aplicaciones al FRR si:
+Determinar a partir de las casi 500 aplicaciones al FRR:
 
-- Hay temas recurrentes de interés regional
+- Si hay temas recurrentes de interés regional
 - Si los temas de interés son específicos para cada país
+- Coomo se distribuyeron las postulaciones en las áreas de interés de PULSANTE
 - Alimentar las decisiones de los próximos pasos
 
 
@@ -138,20 +160,51 @@ Determinar a partir de las casi 500 aplicaciones al FRR si:
 # Marco del análisis
 
 - Casi 500 propuestas presentadas
-- 55 temas diferentes, agregados en 7 grandes grupos
+- 55 temas diferentes, agregados en:
+  + 5 dimensiones que reflejan el trabajo de PULSANTE
+  + 10 indicadores, que detallan las dimensiones de trabajo de PULSANTE 
 - 20 países postulantes
 - 15 semanas
 
+---
+
+# Dimensiones e indicadores de PULSANTE
+
+- Libertad de información y libertad de expresión
+  + Acceso a información
+  + Libertad de expresión
+  + Libertad de medios de comunicación
+  + Libertad en internet
+
+- Derecho de asamblea y asociación
+  + Derecho de asociación
+  + Autonomía de las organizaciones sociales
+  + Financiamiento de organizaciones sociales
+
+- Participación ciudadana y/o elecciones libres y justas
+  + Participación ciudadana
+  + Incidencia ciudadana
+  
+- No discriminación/inclusión
+  + Derechos de mujeres
+  + Derechos de minorías
+  + Derechos de grupos marginalizados
+  
+- Protección de derechos humanos y el estado de derecho
+  + Derechos humanos e imperio de la ley
 
 ---
 # Temas de las postulaciones
 
 ```{r, echo = F, include = T}
 temp %>% 
-  count(agregado, tema) %>% 
+  count(sub_indicadores_pulsante, tema) %>% 
   arrange(desc(n)) %>% 
   remove_missing() %>% 
-  mutate(prop = prop.table(n)*100) -> temp1
+  mutate(prop = prop.table(n)*100) %>% 
+  rename(
+    agregado = sub_indicadores_pulsante
+  ) -> temp1
 
 # colores
 cols <- rep(c("#E01F52", "#C6A659", "#06D6A0", "#466B77", "#073B4C", 
@@ -212,31 +265,32 @@ hchart(
   ) %>% 
   hc_tooltip(backgroundColor = "white", borderWidth = 0.001, valueSuffix = "%") %>% 
   hc_size(height = 550) %>% 
-  hc_title(text = "El área representa la proporción del tema") %>% 
-  hc_subtitle(text = "Puede hacer click sobre el tema agregado en letras grandes para mayores detalles<br>Las letras grandes representan a los temas agregados y las pequeñas a los sub-temas") 
+  hc_title(text = "El área representa la proporción de los indicadores de PULSANTE") %>% 
+  hc_subtitle(text = "Puede hacer click sobre cada rectángulo en letras grandes para mayores detalles<br>Las letras grandes representan a los indicadores de PULSANTE agregados y las pequeñas a los temas de las postulaciones ") 
   
 ```
 ---
 
 # Temas de las postulaciones
 
-De los siete grandes grupos/temas el de "Democracia y política" concentra un cuarto de las postulaciones. La menor proporción es la de "Desarrollo Económico" con 4%
+De los siete grandes grupos/temas el de "Derechos humanos e imperio de la Ley" concentra un cuarto de las postulaciones. 
 <br>
 <br>
 ¿Cómo se distribuyen estos temas en los 20 países, hay alguna tendencia?
 
 ---
-# Grandes temas vs Países
+# Indicadores de Pulsante vs Países
 ```{r, echo = F, include = T}
 temp %>% 
   group_split(pais) %>% 
   map(., ~group_by(., pais) %>% 
-        count(agregado) %>% 
+        count(indicadores_pulsante) %>% 
         mutate(
           pro = prop.table(n)*100
         ) %>% 
         mutate_if(is.numeric, round, 1)) %>% 
-  bind_rows() -> temp2
+  bind_rows() %>% 
+  rename(agregado = indicadores_pulsante) -> temp2
 
 
 hchart(
@@ -269,10 +323,11 @@ hchart(
 
 # Grandes temas vs Países
 
-- Género ha tenido al menos una postulación de todos los países. ¿Concidencia regional?: SI.
-- Democracia y política es el segundo gran tema de concurrencia regional
+- Derechos de mujeres ha tenido al menos una postulación de todos los países. ¿Concidencia regional?: SI.
 
-- Desarrollo económico es el tema menos concurrido regionalmente
+- Derechos humanios e imperio de la ley  es el segundo indiocador de concurrencia regional
+
+- Libertad de expresión es el indicador menos concurrido regionalmente
 
 - ¿Los temas específicos tendrán alguna congregación regional?
 
@@ -284,13 +339,13 @@ hchart(
 temp %>% 
   group_split(pais) %>% 
   map(., ~group_by(., pais) %>% 
-        count(tema) %>% 
+        count(sub_indicadores_pulsante) %>% 
         mutate(
           pro = prop.table(n)*100
         ) %>% 
         mutate_if(is.numeric, round, 1)) %>% 
-  bind_rows() -> temp3
-
+  bind_rows() %>% 
+  rename(tema = sub_indicadores_pulsante)-> temp3
 
 
 hchart(
@@ -333,8 +388,6 @@ hchart(
 
 - Género como gran tema, equidad de género como tema particular pueden pensarse desde una lógica regional
 
-- Las postulaciones sobre asuntos económicos, como reactivación económica
-
 - Existe coherencia regional en temas como corrupción y procesos electorales
 
 - De forma menor, el gran tema de violencia congrega a más de la mitad de los países
@@ -344,11 +397,12 @@ hchart(
 ---
 # Argentina
 ```{r, echo = F, include = T}
-
-
 temp %>%
   filter(pais == "Argentina") %>% 
-  count(agregado, tema) %>% 
+  count(sub_indicadores_pulsante, tema) %>% 
+  rename(
+    agregado = sub_indicadores_pulsante,
+  ) %>% 
   arrange(desc(n)) %>% 
   remove_missing() %>% 
   mutate(prop = prop.table(n)*100) -> temp1
@@ -368,8 +422,7 @@ temp1 %>%
   ) %>% 
   left_join(., temp1) -> temp1
   
-  
-lvl_opts <-  list(
+  lvl_opts <-  list(
   list(
     level = 1,
     borderWidth = 0,
@@ -421,7 +474,10 @@ hchart(
 
 temp %>%
   filter(pais == "Bolivia") %>% 
-  count(agregado, tema) %>% 
+  count(sub_indicadores_pulsante, tema) %>% 
+  rename(
+    agregado = sub_indicadores_pulsante,
+  ) %>% 
   arrange(desc(n)) %>% 
   remove_missing() %>% 
   mutate(prop = prop.table(n)*100) -> temp1
@@ -494,7 +550,10 @@ hchart(
 
 temp %>%
   filter(pais == "Brasil") %>% 
-  count(agregado, tema) %>% 
+  count(sub_indicadores_pulsante, tema) %>% 
+  rename(
+    agregado = sub_indicadores_pulsante,
+  ) %>% 
   arrange(desc(n)) %>% 
   remove_missing() %>% 
   mutate(prop = prop.table(n)*100) -> temp1
@@ -567,7 +626,10 @@ hchart(
 ```{r, echo = F, include = T}
 temp %>%
   filter(pais == "Chile") %>% 
-  count(agregado, tema) %>% 
+  count(sub_indicadores_pulsante, tema) %>% 
+  rename(
+    agregado = sub_indicadores_pulsante,
+  ) %>% 
   arrange(desc(n)) %>% 
   remove_missing() %>% 
   mutate(prop = prop.table(n)*100) -> temp1
@@ -640,7 +702,10 @@ hchart(
 ```{r, echo = F, include = T}
 temp %>%
   filter(pais == "Colombia") %>% 
-  count(agregado, tema) %>% 
+  count(sub_indicadores_pulsante, tema) %>% 
+  rename(
+    agregado = sub_indicadores_pulsante,
+  ) %>% 
   arrange(desc(n)) %>% 
   remove_missing() %>% 
   mutate(prop = prop.table(n)*100) -> temp1
@@ -714,7 +779,10 @@ hchart(
 ```{r, echo = F, include = T}
 temp %>%
   filter(pais == "Ecuador") %>% 
-  count(agregado, tema) %>% 
+  count(sub_indicadores_pulsante, tema) %>% 
+  rename(
+    agregado = sub_indicadores_pulsante,
+  ) %>% 
   arrange(desc(n)) %>% 
   remove_missing() %>% 
   mutate(prop = prop.table(n)*100) -> temp1
@@ -788,7 +856,10 @@ hchart(
 ```{r, echo = F, include = T}
 temp %>%
   filter(pais == "El Salvador") %>% 
-  count(agregado, tema) %>% 
+  count(sub_indicadores_pulsante, tema) %>% 
+  rename(
+    agregado = sub_indicadores_pulsante,
+  ) %>% 
   arrange(desc(n)) %>% 
   remove_missing() %>% 
   mutate(prop = prop.table(n)*100) -> temp1
@@ -861,7 +932,10 @@ hchart(
 ```{r, echo = F, include = T}
 temp %>%
   filter(pais == "Guatemala") %>% 
-  count(agregado, tema) %>% 
+  count(sub_indicadores_pulsante, tema) %>% 
+  rename(
+    agregado = sub_indicadores_pulsante,
+  ) %>% 
   arrange(desc(n)) %>% 
   remove_missing() %>% 
   mutate(prop = prop.table(n)*100) -> temp1
@@ -935,7 +1009,10 @@ hchart(
 ```{r, echo = F, include = T}
 temp %>%
   filter(pais == "Haití") %>% 
-  count(agregado, tema) %>% 
+  count(sub_indicadores_pulsante, tema) %>% 
+  rename(
+    agregado = sub_indicadores_pulsante,
+  ) %>% 
   arrange(desc(n)) %>% 
   remove_missing() %>% 
   mutate(prop = prop.table(n)*100) -> temp1
@@ -1009,7 +1086,10 @@ hchart(
 ```{r, echo = F, include = T}
 temp %>%
   filter(pais == "Honduras") %>% 
-  count(agregado, tema) %>% 
+  count(sub_indicadores_pulsante, tema) %>% 
+  rename(
+    agregado = sub_indicadores_pulsante,
+  ) %>% 
   arrange(desc(n)) %>% 
   remove_missing() %>% 
   mutate(prop = prop.table(n)*100) -> temp1
@@ -1083,7 +1163,10 @@ hchart(
 ```{r, echo = F, include = T}
 temp %>%
   filter(pais == "México") %>% 
-  count(agregado, tema) %>% 
+  count(sub_indicadores_pulsante, tema) %>% 
+  rename(
+    agregado = sub_indicadores_pulsante,
+  ) %>% 
   arrange(desc(n)) %>% 
   remove_missing() %>% 
   mutate(prop = prop.table(n)*100) -> temp1
@@ -1156,7 +1239,10 @@ hchart(
 ```{r, echo = F, include = T}
 temp %>%
   filter(pais == "Nicaragua") %>% 
-  count(agregado, tema) %>% 
+  count(sub_indicadores_pulsante, tema) %>% 
+  rename(
+    agregado = sub_indicadores_pulsante,
+  ) %>% 
   arrange(desc(n)) %>% 
   remove_missing() %>% 
   mutate(prop = prop.table(n)*100) -> temp1
@@ -1230,7 +1316,10 @@ hchart(
 ```{r, echo = F, include = T}
 temp %>%
   filter(pais == "Panamá") %>% 
-  count(agregado, tema) %>% 
+  count(sub_indicadores_pulsante, tema) %>% 
+  rename(
+    agregado = sub_indicadores_pulsante,
+  ) %>% 
   arrange(desc(n)) %>% 
   remove_missing() %>% 
   mutate(prop = prop.table(n)*100) -> temp1
@@ -1305,7 +1394,10 @@ hchart(
 ```{r, echo = F, include = T}
 temp %>%
   filter(pais == "Paraguay") %>% 
-  count(agregado, tema) %>% 
+  count(sub_indicadores_pulsante, tema) %>% 
+  rename(
+    agregado = sub_indicadores_pulsante,
+  ) %>% 
   arrange(desc(n)) %>% 
   remove_missing() %>% 
   mutate(prop = prop.table(n)*100) -> temp1
@@ -1379,7 +1471,10 @@ hchart(
 ```{r, echo = F, include = T}
 temp %>%
   filter(pais == "Perú") %>% 
-  count(agregado, tema) %>% 
+  count(sub_indicadores_pulsante, tema) %>% 
+  rename(
+    agregado = sub_indicadores_pulsante,
+  ) %>% 
   arrange(desc(n)) %>% 
   remove_missing() %>% 
   mutate(prop = prop.table(n)*100) -> temp1
@@ -1452,7 +1547,10 @@ hchart(
 ```{r, echo = F, include = T}
 temp %>%
   filter(pais == "República Dominicana") %>% 
-  count(agregado, tema) %>% 
+  count(sub_indicadores_pulsante, tema) %>% 
+  rename(
+    agregado = sub_indicadores_pulsante,
+  ) %>% 
   arrange(desc(n)) %>% 
   remove_missing() %>% 
   mutate(prop = prop.table(n)*100) -> temp1
@@ -1525,7 +1623,10 @@ hchart(
 ```{r, echo = F, include = T}
 temp %>%
   filter(pais == "Uruguay") %>% 
-  count(agregado, tema) %>% 
+  count(sub_indicadores_pulsante, tema) %>% 
+  rename(
+    agregado = sub_indicadores_pulsante,
+  ) %>% 
   arrange(desc(n)) %>% 
   remove_missing() %>% 
   mutate(prop = prop.table(n)*100) -> temp1
@@ -1598,7 +1699,10 @@ hchart(
 ```{r, echo = F, include = T}
 temp %>%
   filter(pais == "Venezuela") %>% 
-  count(agregado, tema) %>% 
+  count(sub_indicadores_pulsante, tema) %>% 
+  rename(
+    agregado = sub_indicadores_pulsante,
+  ) %>% 
   arrange(desc(n)) %>% 
   remove_missing() %>% 
   mutate(prop = prop.table(n)*100) -> temp1
