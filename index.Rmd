@@ -168,7 +168,7 @@ Determinar a partir de las casi 500 aplicaciones al FRR:
 
 ---
 
-# Dimensiones e indicadores de PULSANTE
+# Dimensiones/indicadores: PULSANTE
 
 - Libertad de información y libertad de expresión
   + Acceso a información
@@ -176,15 +176,25 @@ Determinar a partir de las casi 500 aplicaciones al FRR:
   + Libertad de medios de comunicación
   + Libertad en internet
 
+---
+
+# Dimensiones/indicadores: PULSANTE
+
 - Derecho de asamblea y asociación
   + Derecho de asociación
   + Autonomía de las organizaciones sociales
   + Financiamiento de organizaciones sociales
 
+---
+# Dimensiones/indicadores: PULSANTE
+
 - Participación ciudadana y/o elecciones libres y justas
   + Participación ciudadana
   + Incidencia ciudadana
   
+---
+# Dimensiones/indicadores: PULSANTE
+
 - No discriminación/inclusión
   + Derechos de mujeres
   + Derechos de minorías
@@ -192,8 +202,8 @@ Determinar a partir de las casi 500 aplicaciones al FRR:
   
 - Protección de derechos humanos y el estado de derecho
   + Derechos humanos e imperio de la ley
-
 ---
+
 # Temas de las postulaciones
 
 ```{r, echo = F, include = T}
